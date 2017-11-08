@@ -22,7 +22,9 @@
 	window.onload=function(){
 		var btn = document.getElementById("btn");
 		btn.addEventListener("click", function(){
-			window.close();
+		window.opener.document.frm.id.value='<%=id%>';
+		window.opener.document.frm.idCheck.value="1";
+		window.self.close();
 		});
 	}
 </script>
