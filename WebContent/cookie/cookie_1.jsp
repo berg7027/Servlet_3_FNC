@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
 	Cookie c = new Cookie("test", "choa");
-	c.setMaxAge(5);
+	c.setMaxAge(60*60*24);   //쿠키
+	c.setPath("/");
 	response.addCookie(c);
 %>    
 <!DOCTYPE html>

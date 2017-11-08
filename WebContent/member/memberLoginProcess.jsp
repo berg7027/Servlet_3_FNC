@@ -6,6 +6,8 @@
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
 	
+	
+	
 	MemberDTO memberDTO = new MemberDTO();
 	memberDTO.setId(request.getParameter("id"));
 	memberDTO.setPw(request.getParameter("pw"));
@@ -16,7 +18,10 @@
 	
 	String path = "./memberLoginForm.jsp";
 	if(memberDTO != null){
-		path = "../index.jsp";
+		
+		request.setAttribute("member", memberDTO);
+		RequestDispatcher view = request.getRequestDispatcher("../index.jsp");
+		view.forward(request, response);
 	}
 	
 	response.sendRedirect(path);

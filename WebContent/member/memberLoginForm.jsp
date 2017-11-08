@@ -26,6 +26,15 @@
 						placeholder="Enter ID">
 				</div>
 			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="Job">ID저장하기:</label>
+				<div class="col-sm-10">
+					<input type="checkbox" value="save" class="checkbox-inline" name="save">
+				</div>
+			</div>
+			
+			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pw">PW:</label>
 				<div class="col-sm-10">
