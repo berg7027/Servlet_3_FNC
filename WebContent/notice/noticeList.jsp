@@ -7,28 +7,32 @@
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
 	String kind=request.getParameter("kind");
-	String search=request.getParameter("search");
+	String search = request.getParameter("search");
+	
+	if(kind==null){
+		kind="title";
+	}
+	
+	if(search==null){
+		search="";
+	}
+	
 	int curPage=1;
 	try{
 		curPage=Integer.parseInt(request.getParameter("curPage"));
 	}catch(Exception e){
 		e.printStackTrace();
 	}
-	if(kind==null){
-		kind="title";
-	}
-	if(search==null){
-		search="";
-	}
+	
 	
 	int perPage=10;
 	int startRow=(curPage-1)*perPage+1;
 	int lastRow=curPage*perPage;
 	NoticeDAO noticeDAO = new NoticeDAO();
-	ArrayList<NoticeDTO> ar = noticeDAO.selectList(startRow,lastRow,kind,search);
+	ArrayList<NoticeDTO> ar = noticeDAO.selectList(startRow,lastRow, kind, search);
 	///////////////////////////////////////////
 	//pageing
-	int totalCount = noticeDAO.getTotalCount();
+	int totalCount = noticeDAO.getTotalCount(kind, search);
 	int totalPage=0;
 	if(totalCount%perPage==0){
 		totalPage=totalCount/perPage;
@@ -119,23 +123,24 @@
   
   <ul class="pagination">
   	<% if(curBlock>1){ %>
-  	 <li><a href="./noticeList.jsp?curPage=<%=startNum-1%>">[이전]</a></li>
+  	 <li><a href="./noticeList.jsp?curPage=<%=startNum-1%>&kind=<%=kind%>&search=<%=search%>">[이전]</a></li>
   	 <%} %>
   
     <%	for(int i=startNum;i<=lastNum;i++){ %>
     
-    <li><a href="./noticeList.jsp?curPage=<%=i%>"><%=i %></a></li>
+    <li><a href="./noticeList.jsp?curPage=<%=i%>&kind=<%=kind%>&search=<%=search%>"><%=i %></a></li>
     
     <%} %>
     
     <%if(curBlock < totalBlock){ %>
-    <li><a href="./noticeList.jsp?curPage=<%=lastNum+1%>">[다음]</a></li>
+    <li><a href="./noticeList.jsp?curPage=<%=lastNum+1%>&kind=<%=kind%>&search=<%=search%>">[다음]</a></li>
     <%} %>
   </ul>
 </div>
 	<!-- end -->
 	<!-- search 제목, 작성자, 내용 -->
 	<form action="./noticeList.jsp">
+		<input type="hidden" name="curPage">
 		<select name="kind">
 			<option value="title">Title</option>
 			<option value="writer">Writer</option>
@@ -145,8 +150,10 @@
 		<input type="submit" value="SEARCH">
 	</form>
 	<!-- search -->		
-			
+			<%if(memberDTO !=null && memberDTO.getJob().equals("T")){ %>
 			<a class="btn btn-success" href="./noticeWriteForm.jsp">WRITE</a>
+			<%} %>
+			
 		</article>
 	</section>
 	<%@ include file="../temp/footer.jsp" %>
