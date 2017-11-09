@@ -101,7 +101,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%for(MemberDTO memberDTO :ar){ %>
+					<%for(int i=0;i<ar.size();i++){
+						memberDTO = ar.get(i);%>
 						<tr>
 							<td><%= memberDTO.getId() %></td>
 							<td><%= memberDTO.getName() %> </td>
