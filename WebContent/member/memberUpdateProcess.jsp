@@ -6,36 +6,23 @@
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
 	
-	
-	
 	MemberDTO memberDTO = new MemberDTO();
-	memberDTO.setId(request.getParameter("id"));
+	memberDTO.setId(((MemberDTO)session.getAttribute("member")).getId());
 	memberDTO.setPw(request.getParameter("pw"));
-	memberDTO.setJob(request.getParameter("job"));
-	String save = request.getParameter("save");
-	
-	if(save != null){
-		Cookie c = new Cookie("id", memberDTO.getId());
-		c.setMaxAge(60*10);
-		response.addCookie(c);
-	}else {
-		Cookie c = new Cookie("id", "");
-		c.setMaxAge(0);
-		response.addCookie(c);
-	}
-	
+	memberDTO.setName(request.getParameter("name"));
+	memberDTO.setEmail(request.getParameter("email"));
+	memberDTO.setPhone(request.getParameter("phone"));
+	memberDTO.setAge(Integer.parseInt(request.getParameter("age")));
 	MemberDAO memberDAO = new MemberDAO();
-	memberDTO = memberDAO.selectOne(memberDTO);
+	int result = memberDAO.update(memberDTO);
 	
-	String path = "./memberLoginForm.jsp";
-	if(memberDTO != null){
-		
+	if(result>0){
+		memberDTO.setJob(((MemberDTO)session.getAttribute("member")).getJob());
 		session.setAttribute("member", memberDTO);
-		
-		path ="../index.jsp";
 	}
 	
-	response.sendRedirect(path);
+	response.sendRedirect("./memberMyPage.jsp");
+	
 	
 %>    
 <!DOCTYPE html>

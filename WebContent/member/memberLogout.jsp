@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    <%
-    	session.setMaxInactiveInterval(600); //10분뒤 자동로그아웃 (session데이터 삭제)
-    	session.invalidate();; //로그아웃 메서드 자동으로 
-     %>
+<%
+	
+	session.invalidate();//로그아웃 메서드
+	response.sendRedirect("../index.jsp");
+	
+%>    
 <!DOCTYPE html>
 <html>
 <head>
