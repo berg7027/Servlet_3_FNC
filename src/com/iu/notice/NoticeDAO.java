@@ -9,7 +9,7 @@ import com.iu.util.DBConnector;
 
 public class NoticeDAO {
 	//getTotalCount
-	public int getTotalCount() throws Exception{
+	public int getTotalCount(String kind, String search) throws Exception{
 		Connection con = DBConnector.getConnect();
 		String sql ="select nvl(count(num), 0) from notice";
 		PreparedStatement st = con.prepareStatement(sql);
