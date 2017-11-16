@@ -25,18 +25,18 @@
 	<section id="main">
 		<div id="mainContents">
 			<article id="mainImage">
-				<img src="./images/main/main.jpg">
+				<img src="./images/ccc/main.jpg">
 			</article>
 			<section id="mainBoard">
 				<article class="mainPost">
-					<img src="./images/main/mPost_1.PNG">
+					<img src="./images/ccc/mPost_1.PNG">
 				</article>
 				<article class="mainPost">
-					<img src="./images/main/mPost_2.PNG">
+					<img src="./images/ccc/mPost_2.PNG">
 				</article>
 				<article class="mainPost">
-					<div><img src="./images/main/mPost_3.PNG"></div>
-					<div><img src="./images/main/mPost_4.PNG"></div>
+					<div><img src="./images/ccc/mPost_3.PNG"></div>
+					<div><img src="./images/ccc/mPost_4.PNG"></div>
 				</article>
 			</section>
 		</div>

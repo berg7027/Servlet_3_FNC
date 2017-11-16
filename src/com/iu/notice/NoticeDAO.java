@@ -1,5 +1,7 @@
 package com.iu.notice;
 
+
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,10 +11,11 @@ import com.iu.util.DBConnector;
 
 public class NoticeDAO {
 	//getTotalCount
-	public int getTotalCount(String kind, String search) throws Exception{
+	public int getTotalCount(String kind,String search) throws Exception{
 		Connection con = DBConnector.getConnect();
-		String sql ="select nvl(count(num), 0) from notice";
+		String sql ="select nvl(count(num), 0) from notice where "+ kind+ " like ?";
 		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, "%"+search+"%");
 		ResultSet rs = st.executeQuery();
 		rs.next();
 		int totalCount=rs.getInt(1);
@@ -37,7 +40,7 @@ public class NoticeDAO {
 	
 	
 	//selectList
-	public ArrayList<NoticeDTO> selectList(int startRow, int lastRow, String kind, String search) throws Exception{
+	public ArrayList<NoticeDTO> selectList(int startRow, int lastRow,String kind, String search) throws Exception{
 		Connection con = DBConnector.getConnect();
 		
 		String sql ="select * from "
@@ -91,7 +94,7 @@ public class NoticeDAO {
 		return noticeDTO;
 	}
 	
-	//insert  (가입)
+	//insert
 	public int insert(NoticeDTO noticeDTO)throws Exception {
 		Connection con = DBConnector.getConnect();
 		

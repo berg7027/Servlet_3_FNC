@@ -56,7 +56,7 @@
 		<a class="btn btn-info" href="./noticeDelete.jsp?num=<%=noticeDTO.getNum()%>">Delete</a>
 		<a class="btn btn-info" href="./noticeUpdateForm.jsp?num=<%=noticeDTO.getNum()%>">Update</a>
 		<a class="btn btn-info" href="./noticeList.jsp">List</a>
-
+		<a href="../images/main/main.jpg">Main</a>
 	</section>
 	<%@ include file="../temp/footer.jsp"%>
 
